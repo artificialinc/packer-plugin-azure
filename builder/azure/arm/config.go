@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MPL-2.0
 
 //go:generate packer-sdc struct-markdown
-//go:generate packer-sdc mapstructure-to-hcl2 -type Config,SharedImageGallery,SharedImageGalleryDestination,PlanInformation,Spot,TargetRegion
+//go:generate packer-sdc mapstructure-to-hcl2 -type Config,SharedImageGallery,SharedImageGalleryDestination,PlanInformation,Spot,TargetRegion,AdditionalCapabilities
 
 package arm
 
@@ -158,6 +158,13 @@ type Spot struct {
 	EvictionPolicy virtualmachines.VirtualMachineEvictionPolicyTypes `mapstructure:"eviction_policy"`
 	// How much should the VM cost maximally per hour. Specify -1 (or do not specify) to not evict based on price.
 	MaxPrice float32 `mapstructure:"max_price"`
+}
+
+type AdditionalCapabilities struct {
+	// Enable UltraSSD for the VM. This is only available for certain VM sizes.
+	UltraSSDEnabled bool `mapstructure:"ultra_ssd_enabled"`
+	// Enable hibernation for the VM. This is only available for certain VM sizes.
+	HibernationEnabled bool `mapstructure:"hibernation_enabled"`
 }
 
 type Config struct {
@@ -682,6 +689,8 @@ type Config struct {
 	// value and defaults to false. Important Setting this true means that
 	// your builds are faster, however any failed deletes are not reported.
 	AsyncResourceGroupDelete bool `mapstructure:"async_resourcegroup_delete" required:"false"`
+
+	AdditionalCapabilities AdditionalCapabilities `mapstructure:"additional_capabilities" required:"false"`
 }
 
 type keyVaultCertificate struct {

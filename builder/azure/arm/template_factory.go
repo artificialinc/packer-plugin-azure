@@ -355,6 +355,13 @@ func GetVirtualMachineTemplateBuilder(config *Config) (*template.TemplateBuilder
 		}
 	}
 
+	if config.AdditionalCapabilities.HibernationEnabled || config.AdditionalCapabilities.UltraSSDEnabled {
+		err = builder.SetAdditionalCapabilities(config.AdditionalCapabilities.HibernationEnabled, config.AdditionalCapabilities.UltraSSDEnabled)
+		if err != nil {
+			return nil, err
+		}
+	}
+
 	err = builder.SetTags(&config.AzureTags)
 	if err != nil {
 		return nil, err

@@ -128,12 +128,13 @@ type Properties struct {
 	EvictionPolicy               *hashiVMSDK.VirtualMachineEvictionPolicyTypes `json:"evictionPolicy,omitempty"`
 	BillingProfile               *BillingProfile                               `json:"billingProfile,omitempty"`
 	//CustomScript extension related properties
-	Publisher               *string               `json:"publisher,omitempty"`
-	Type                    *string               `json:"type,omitempty"`
-	TypeHandlerVersion      *string               `json:"typeHandlerVersion,omitempty"`
-	AutoUpgradeMinorVersion *bool                 `json:"autoUpgradeMinorVersion,omitempty"`
-	Settings                *CustomScriptSettings `json:"settings,omitempty"`
-	Attributes              *Attributes           `json:"attributes,omitempty"`
+	Publisher               *string                 `json:"publisher,omitempty"`
+	Type                    *string                 `json:"type,omitempty"`
+	TypeHandlerVersion      *string                 `json:"typeHandlerVersion,omitempty"`
+	AutoUpgradeMinorVersion *bool                   `json:"autoUpgradeMinorVersion,omitempty"`
+	Settings                *CustomScriptSettings   `json:"settings,omitempty"`
+	Attributes              *Attributes             `json:"attributes,omitempty"`
+	AdditionalCapabilities  *AdditionalCapabilities `json:"additionalCapabilities,omitempty"`
 }
 
 type CustomScriptSettings struct {
@@ -166,4 +167,9 @@ type Sku struct {
 	Family *string `json:"family,omitempty"`
 	Name   *string `json:"name,omitempty"`
 	Tier   *string `json:"tier,omitempty"`
+}
+
+type AdditionalCapabilities struct {
+	UltraSSDEnabled    *bool `json:"ultraSSDEnabled,omitempty"`
+	HibernationEnabled *bool `json:"hibernationEnabled,omitempty"`
 }

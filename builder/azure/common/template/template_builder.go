@@ -438,6 +438,20 @@ func (s *TemplateBuilder) SetUserData(userData string) error {
 	return nil
 }
 
+func (s *TemplateBuilder) SetAdditionalCapabilities(hibernationEnabled, ultraSSDEnabled bool) error {
+	resource, err := s.getResourceByType(resourceVirtualMachine)
+	if err != nil {
+		return err
+	}
+
+	resource.Properties.AdditionalCapabilities = &AdditionalCapabilities{
+		UltraSSDEnabled:    common.BoolPtr(ultraSSDEnabled),
+		HibernationEnabled: common.BoolPtr(hibernationEnabled),
+	}
+
+	return nil
+}
+
 func (s *TemplateBuilder) SetVirtualNetwork(virtualNetworkResourceGroup, virtualNetworkName, subnetName string) error {
 	s.setVariable("virtualNetworkResourceGroup", virtualNetworkResourceGroup)
 	s.setVariable("virtualNetworkName", virtualNetworkName)

@@ -9,6 +9,31 @@ import (
 	"github.com/zclconf/go-cty/cty"
 )
 
+// FlatAdditionalCapabilities is an auto-generated flat version of AdditionalCapabilities.
+// Where the contents of a field with a `mapstructure:,squash` tag are bubbled up.
+type FlatAdditionalCapabilities struct {
+	UltraSSDEnabled    *bool `mapstructure:"ultra_ssd_enabled" cty:"ultra_ssd_enabled" hcl:"ultra_ssd_enabled"`
+	HibernationEnabled *bool `mapstructure:"hibernation_enabled" cty:"hibernation_enabled" hcl:"hibernation_enabled"`
+}
+
+// FlatMapstructure returns a new FlatAdditionalCapabilities.
+// FlatAdditionalCapabilities is an auto-generated flat version of AdditionalCapabilities.
+// Where the contents a fields with a `mapstructure:,squash` tag are bubbled up.
+func (*AdditionalCapabilities) FlatMapstructure() interface{ HCL2Spec() map[string]hcldec.Spec } {
+	return new(FlatAdditionalCapabilities)
+}
+
+// HCL2Spec returns the hcl spec of a AdditionalCapabilities.
+// This spec is used by HCL to read the fields of AdditionalCapabilities.
+// The decoded values from this spec will then be applied to a FlatAdditionalCapabilities.
+func (*FlatAdditionalCapabilities) HCL2Spec() map[string]hcldec.Spec {
+	s := map[string]hcldec.Spec{
+		"ultra_ssd_enabled":   &hcldec.AttrSpec{Name: "ultra_ssd_enabled", Type: cty.Bool, Required: false},
+		"hibernation_enabled": &hcldec.AttrSpec{Name: "hibernation_enabled", Type: cty.Bool, Required: false},
+	}
+	return s
+}
+
 // FlatConfig is an auto-generated flat version of Config.
 // Where the contents of a field with a `mapstructure:,squash` tag are bubbled up.
 type FlatConfig struct {
@@ -150,6 +175,7 @@ type FlatConfig struct {
 	WinRMInsecure                              *bool                              `mapstructure:"winrm_insecure" cty:"winrm_insecure" hcl:"winrm_insecure"`
 	WinRMUseNTLM                               *bool                              `mapstructure:"winrm_use_ntlm" cty:"winrm_use_ntlm" hcl:"winrm_use_ntlm"`
 	AsyncResourceGroupDelete                   *bool                              `mapstructure:"async_resourcegroup_delete" required:"false" cty:"async_resourcegroup_delete" hcl:"async_resourcegroup_delete"`
+	AdditionalCapabilities                     *FlatAdditionalCapabilities        `mapstructure:"additional_capabilities" required:"false" cty:"additional_capabilities" hcl:"additional_capabilities"`
 }
 
 // FlatMapstructure returns a new FlatConfig.
@@ -302,6 +328,7 @@ func (*FlatConfig) HCL2Spec() map[string]hcldec.Spec {
 		"winrm_insecure":                          &hcldec.AttrSpec{Name: "winrm_insecure", Type: cty.Bool, Required: false},
 		"winrm_use_ntlm":                          &hcldec.AttrSpec{Name: "winrm_use_ntlm", Type: cty.Bool, Required: false},
 		"async_resourcegroup_delete":              &hcldec.AttrSpec{Name: "async_resourcegroup_delete", Type: cty.Bool, Required: false},
+		"additional_capabilities":                 &hcldec.BlockSpec{TypeName: "additional_capabilities", Nested: hcldec.ObjectSpec((*FlatAdditionalCapabilities)(nil).HCL2Spec())},
 	}
 	return s
 }

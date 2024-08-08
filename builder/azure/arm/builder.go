@@ -66,7 +66,7 @@ func (b *Builder) Prepare(raws ...interface{}) ([]string, []string, error) {
 
 func (b *Builder) Run(ctx context.Context, ui packersdk.Ui, hook packersdk.Hook) (packersdk.Artifact, error) {
 	// All requests on the new (non auto rest) base layer of the azure SDK require a context with a timeout for polling purposes
-	ui.Say("Running builder ...")
+	ui.Say("ADJ Running builder ...")
 
 	// FillParameters function captures authType and sets defaults.
 	err := b.config.ClientConfig.FillParameters()
